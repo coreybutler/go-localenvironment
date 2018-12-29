@@ -44,7 +44,6 @@ import (
   "io/ioutil"
   "path/filepath"
   "encoding/json"
-  "log"
 )
 
 var knownEnvVars map[string]interface{}
@@ -73,7 +72,7 @@ func Apply () {
 
 // Removes environment variables applied with localenvironment.
 func Clear () {
-  for key, value := range knownEnvVars {
+  for key, _ := range knownEnvVars {
     os.Unsetenv(key)
   }
 }
