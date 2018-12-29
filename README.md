@@ -1,5 +1,6 @@
 # go-localenvironment
 
+[![Version](https://img.shields.io/github/tag/coreybutler/go-localenvironment.svg)](https://github.com/coreybutler/go-localenvironment)
 [![GoDoc](https://godoc.org/github.com/coreybutler/go-localenvironment?status.svg)](https://godoc.org/github.com/coreybutler/go-localenvironment)
 [![Build Status](https://travis-ci.org/coreybutler/go-localenvironment.svg?branch=master)](https://travis-ci.org/coreybutler/go-localenvironment)
 
