@@ -1,7 +1,7 @@
 // Apply environment variables if they exist in `env.json`.
 // For example, the directory structure might look like:
 //
-// ```sh
+// ```
 // > dir
 //   - main.exe (or whatever executable you generate with `go build`)
 //   - env.json
@@ -9,7 +9,7 @@
 //
 // Consider the following `env.json` file (in the current working directory):
 //
-// ```json
+// ```
 // {
 //   "MY_API_KEY": "12345"
 // }
@@ -17,7 +17,7 @@
 //
 // ... and the main.go file:
 //
-// ```go
+// ```
 // package main
 //
 // import (
