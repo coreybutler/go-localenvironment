@@ -3,9 +3,9 @@
 [![GoDoc](https://godoc.org/github.com/coreybutler/go-localenvironment?status.svg)](https://godoc.org/github.com/coreybutler/go-localenvironment)
 [![Build Status](https://travis-ci.org/coreybutler/go-localenvironment.svg?branch=master)](https://travis-ci.org/coreybutler/go-localenvironment)
 
-This is a port of [coreybutler/localenvironment](https://github.com/coreybutler/localenvironment) (a Node.js library).
+This is a port of the [coreybutler/localenvironment](https://github.com/coreybutler/localenvironment) Node.js module.
 
-**tl;dr** Apply environment variables if they exist in `env.json`.
+**tl;dr** Apply environment variables from a `env.json` in the working directory.
 
 **Install** `go get github.com/coreybutler/go-localenvironment`
 
@@ -13,9 +13,9 @@ This is a port of [coreybutler/localenvironment](https://github.com/coreybutler/
 
 This is yet another environment variable management approach, based on a ridiculously simple concept.
 This module looks for a file called `env.json` and loads each key as an environment variable,
-accessible via the `process.env` object.
+accessible via the [os.Getenv](https://golang.org/pkg/os/#Getenv) method.
 
-For example, the directory structure might look like:
+Consider the followwing directory structure:
 
 ```sh
 > dir
@@ -23,7 +23,7 @@ For example, the directory structure might look like:
   - env.json
 ```
 
-Consider the following `env.json` file (in the current working directory):
+**env.json**
 
 ```json
 {
@@ -31,7 +31,7 @@ Consider the following `env.json` file (in the current working directory):
 }
 ```
 
-... and the main.go file:
+**main.go**:
 
 ```go
 package main
@@ -51,8 +51,8 @@ func main() {
 }
 ```
 
-Running this will output `My API key is 12345.`. The same Go app can be run in any
-directory, each with a different `env.json` file, potentially yielding different results.
+Running `main.exe` (or equivalent binary) or `go run main.go` will output `My API key is 12345.`. The same Go app can be run in any
+directory, each with a different `env.json` file, potentially yielding different results. It would also be possible to change a value in the `env.json` file, yielding a different result the next time the app is executed.
 
 ---
 
