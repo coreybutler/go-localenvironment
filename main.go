@@ -1,23 +1,23 @@
 // Apply environment variables if they exist in `env.json`.
 // For example, the directory structure might look like:
 //
-// ```
+// `
 // > dir
 //   - main.exe (or whatever executable you generate with `go build`)
 //   - env.json
-// ```
+// `
 //
 // Consider the following `env.json` file (in the current working directory):
 //
-// ```
+// `
 // {
 //   "MY_API_KEY": "12345"
 // }
-// ```
+// `
 //
 // ... and the main.go file:
 //
-// ```
+// `
 // package main
 //
 // import (
@@ -33,7 +33,7 @@
 //
 //   log.Printf("My API key is %s.", apiKey)
 // }
-// ```
+// `
 //
 // Running this will output `My API key is 12345.`. The same Go app can be run in any
 // directory, each with a different `env.json` file, potentially yielding different results.
