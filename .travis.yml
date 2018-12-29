@@ -19,4 +19,5 @@ install:
 
 script:
   - echo "{\"TEST\":\"Success\"}" > ./env.json
+  - cat ./env.json
   - go test
