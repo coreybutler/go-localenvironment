@@ -7,4 +7,5 @@
 *.test
 *.out
 !.gitignore
+!.*.yml
 env.json
