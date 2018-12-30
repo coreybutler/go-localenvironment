@@ -47,7 +47,7 @@ import (
 	"path/filepath"
 )
 
-var knownEnvVars map[string]interface{}
+var knownEnvVars map[string]string
 
 // Apply key/value pairs from a local `env.json` file (if it exists).
 // Each key will be available as an environment variable.
@@ -71,7 +71,7 @@ func Apply() error {
 	}
 
 	for key, value := range knownEnvVars {
-		os.Setenv(key, value.(string))
+		os.Setenv(key, value)
 	}
 
 	return nil
