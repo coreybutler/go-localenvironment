@@ -73,7 +73,7 @@ func Apply() {
 
 // Clear removes environment variables applied with localenvironment.
 func Clear() {
-	for key, _ := range knownEnvVars {
+	for key := range knownEnvVars {
 		os.Unsetenv(key)
 	}
 }
