@@ -28,7 +28,10 @@
 // )
 //
 // func main() {
-//   localenvironment.Apply() // Apply the env.json attributes to the environment variables.
+//   err := localenvironment.Apply() // Apply the env.json attributes to the environment variables.
+//   if err != nil {
+//     panic(err)
+//   }
 //
 //   apiKey := os.Getenv("MY_API_KEY")
 //
