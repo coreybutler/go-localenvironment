@@ -4,7 +4,10 @@ import "testing"
 import "os"
 
 func TestLocalEnvironment(t *testing.T) {
-	Apply()
+	err := Apply()
+	if err != nil {
+		t.Fatalf("Unexpected error received from Apply: '%v'", err)
+	}
 
 	nonexistant := os.Getenv("I_DO_NOT_EXIST")
 	if nonexistant != "" {
@@ -17,6 +20,7 @@ func TestLocalEnvironment(t *testing.T) {
 	}
 
 	Clear()
+
 	clearedValue := os.Getenv("TEST")
 	if clearedValue != "" {
 		t.Errorf("Unexpected value received for TEST after Clear: '%s'", clearedValue)

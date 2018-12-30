@@ -51,24 +51,30 @@ var knownEnvVars map[string]interface{}
 
 // Apply key/value pairs from a local `env.json` file (if it exists).
 // Each key will be available as an environment variable.
-func Apply() {
+func Apply() error {
 	cwd, err := os.Getwd()
-
 	if err != nil {
-		return
+		return err
 	}
 
-	raw, fileError := ioutil.ReadFile(filepath.Join(cwd, "env.json"))
-
-	if fileError != nil {
-		return
+	raw, err := ioutil.ReadFile(filepath.Join(cwd, "env.json"))
+	if err != nil {
+		if os.IsNotExist(err) {
+			return nil
+		}
+		return err
 	}
 
-	json.Unmarshal(raw, &knownEnvVars)
+	err = json.Unmarshal(raw, &knownEnvVars)
+	if err != nil {
+		return err
+	}
 
 	for key, value := range knownEnvVars {
 		os.Setenv(key, value.(string))
 	}
+
+	return nil
 }
 
 // Clear removes environment variables applied with localenvironment.
