@@ -15,4 +15,10 @@ func TestLocalEnvironment(t *testing.T) {
 	if expectedvalue != "Success" {
 		t.Errorf("Unexpected value received for TEST attribute: '%s'", expectedvalue)
 	}
+
+	Clear()
+	clearedValue := os.Getenv("TEST")
+	if clearedValue != "" {
+		t.Errorf("Unexpected value received for TEST after Clear: '%s'", clearedValue)
+	}
 }
