@@ -1,4 +1,5 @@
-// Apply environment variables if they exist in `env.json`.
+// Package localenvironment creates environment variables if they exist in
+// `env.json`.
 // For example, the directory structure might look like:
 //
 // `
@@ -70,7 +71,7 @@ func Apply() {
 	}
 }
 
-// Removes environment variables applied with localenvironment.
+// Clear removes environment variables applied with localenvironment.
 func Clear() {
 	for key, _ := range knownEnvVars {
 		os.Unsetenv(key)
