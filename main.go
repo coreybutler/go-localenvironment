@@ -40,39 +40,39 @@
 package localenvironment
 
 import (
-  "os"
-  "io/ioutil"
-  "path/filepath"
-  "encoding/json"
+	"encoding/json"
+	"io/ioutil"
+	"os"
+	"path/filepath"
 )
 
 var knownEnvVars map[string]interface{}
 
 // Apply key/value pairs from a local `env.json` file (if it exists).
 // Each key will be available as an environment variable.
-func Apply () {
-  cwd, err := os.Getwd()
+func Apply() {
+	cwd, err := os.Getwd()
 
-  if err != nil {
-    return
-  }
+	if err != nil {
+		return
+	}
 
-  raw, fileError := ioutil.ReadFile(filepath.Join(cwd, "env.json"))
+	raw, fileError := ioutil.ReadFile(filepath.Join(cwd, "env.json"))
 
-  if fileError != nil {
-    return
-  }
+	if fileError != nil {
+		return
+	}
 
-  json.Unmarshal(raw, &knownEnvVars)
+	json.Unmarshal(raw, &knownEnvVars)
 
-  for key, value := range knownEnvVars {
-    os.Setenv(key, value.(string))
-  }
+	for key, value := range knownEnvVars {
+		os.Setenv(key, value.(string))
+	}
 }
 
 // Removes environment variables applied with localenvironment.
-func Clear () {
-  for key, _ := range knownEnvVars {
-    os.Unsetenv(key)
-  }
+func Clear() {
+	for key, _ := range knownEnvVars {
+		os.Unsetenv(key)
+	}
 }
