@@ -2,42 +2,36 @@
 // `env.json`.
 // For example, the directory structure might look like:
 //
-// `
-// > dir
-//   - main.exe (or whatever executable you generate with `go build`)
-//   - env.json
-// `
+// 		> dir
+// 			- main.exe (or whatever executable you generate with `go build`)
+// 			- env.json
 //
 // Consider the following `env.json` file (in the current working directory):
 //
-// `
-// {
-//   "MY_API_KEY": "12345"
-// }
-// `
+// 		{
+//   		"MY_API_KEY": "12345"
+// 		}
 //
 // ... and the main.go file:
 //
-// `
-// package main
+// 		package main
 //
-// import (
-//   "os"
-//   "log"
-//   "github.com/coreybutler/go-localenvironment"
-// )
+// 		import (
+//   		"os"
+//   		"log"
+//   		"github.com/coreybutler/go-localenvironment"
+// 		)
 //
-// func main() {
-//   err := localenvironment.Apply() // Apply the env.json attributes to the environment variables.
-//   if err != nil {
-//     panic(err)
-//   }
+// 		func main() {
+//   		err := localenvironment.Apply() // Apply the env.json attributes to the environment variables.
+//   		if err != nil {
+//     		panic(err)
+//   		}
 //
-//   apiKey := os.Getenv("MY_API_KEY")
+//   		apiKey := os.Getenv("MY_API_KEY")
 //
-//   log.Printf("My API key is %s.", apiKey)
-// }
-// `
+//   		log.Printf("My API key is %s.", apiKey)
+// 		}
 //
 // Running this will output `My API key is 12345.`. The same Go app can be run in any
 // directory, each with a different `env.json` file, potentially yielding different results.
