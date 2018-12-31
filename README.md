@@ -36,20 +36,20 @@ Consider the following directory contents:
 package main
 
 import (
-  "os"
-  "log"
-  "github.com/coreybutler/go-localenvironment"
+    "os"
+    "log"
+    "github.com/coreybutler/go-localenvironment"
 )
 
 func main() {
-  err := localenvironment.Apply() // Apply the env.json attributes to the environment variables.
-  if err != nil {
-    panic(err)
-  }
+    err := localenvironment.Apply() // Apply the env.json attributes to the environment variables.
+    if err != nil {
+      panic(err)
+    }
 
-  apiKey := os.Getenv("MY_API_KEY")
+    apiKey := os.Getenv("MY_API_KEY")
 
-  log.Printf("My API key is %s.", apiKey)
+    log.Printf("My API key is %s.", apiKey)
 }
 ```
 
