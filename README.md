@@ -44,7 +44,7 @@ import (
 func main() {
     err := localenvironment.Apply() // Apply the env.json attributes to the environment variables.
     if err != nil {
-      panic(err)
+      log.Printf("Error: %s", err)
     }
 
     apiKey := os.Getenv("MY_API_KEY")
