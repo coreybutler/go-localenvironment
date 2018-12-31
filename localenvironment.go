@@ -1,4 +1,5 @@
-// Apply environment variables if they exist in `env.json`.
+// Package localenvironment creates environment variables if they exist in
+// `env.json`.
 // For example, the directory structure might look like:
 //
 // `
@@ -27,7 +28,10 @@
 // )
 //
 // func main() {
-//   localenvironment.Apply() // Apply the env.json attributes to the environment variables.
+//   err := localenvironment.Apply() // Apply the env.json attributes to the environment variables.
+//   if err != nil {
+//     panic(err)
+//   }
 //
 //   apiKey := os.Getenv("MY_API_KEY")
 //
@@ -40,39 +44,45 @@
 package localenvironment
 
 import (
-  "os"
-  "io/ioutil"
-  "path/filepath"
-  "encoding/json"
+	"encoding/json"
+	"io/ioutil"
+	"os"
+	"path/filepath"
 )
 
-var knownEnvVars map[string]interface{}
+var knownEnvVars map[string]string
 
 // Apply key/value pairs from a local `env.json` file (if it exists).
 // Each key will be available as an environment variable.
-func Apply () {
-  cwd, err := os.Getwd()
+func Apply() error {
+	cwd, err := os.Getwd()
+	if err != nil {
+		return err
+	}
 
-  if err != nil {
-    return
-  }
+	raw, err := ioutil.ReadFile(filepath.Join(cwd, "env.json"))
+	if err != nil {
+		if os.IsNotExist(err) {
+			return nil
+		}
+		return err
+	}
 
-  raw, fileError := ioutil.ReadFile(filepath.Join(cwd, "env.json"))
+	err = json.Unmarshal(raw, &knownEnvVars)
+	if err != nil {
+		return err
+	}
 
-  if fileError != nil {
-    return
-  }
+	for key, value := range knownEnvVars {
+		os.Setenv(key, value)
+	}
 
-  json.Unmarshal(raw, &knownEnvVars)
-
-  for key, value := range knownEnvVars {
-    os.Setenv(key, value.(string))
-  }
+	return nil
 }
 
-// Removes environment variables applied with localenvironment.
-func Clear () {
-  for key, _ := range knownEnvVars {
-    os.Unsetenv(key)
-  }
+// Clear removes environment variables applied with localenvironment.
+func Clear() {
+	for key := range knownEnvVars {
+		os.Unsetenv(key)
+	}
 }
