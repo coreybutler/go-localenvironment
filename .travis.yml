@@ -18,6 +18,4 @@ install:
   - # Skip
 
 script:
-  - echo "{\"TEST\":\"Success\"}" > ./env.json
-  - cat ./env.json
   - go test
