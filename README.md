@@ -6,7 +6,19 @@
 
 Apply environment variables sourced from a `env.json` in the current working directory. This is a port of the [coreybutler/localenvironment](https://github.com/coreybutler/localenvironment) Node.js module.
 
-**Install** `go get github.com/coreybutler/go-localenvironment`
+**Install** 
+
+This is a module, so you may be able to just include it in your app via a standard import:
+
+```go
+import "github.com/coreybutler/go-localenvironment"
+```
+
+Alternatively, you should be able to use `go get`:
+
+```sh
+go get github.com/coreybutler/go-localenvironment
+```
 
 ## Overview
 
