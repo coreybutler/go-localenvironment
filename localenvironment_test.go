@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"testing"
+	// "log"
 )
 
 func CreateEnvFile(t *testing.T, vars map[string]string) {
@@ -46,14 +47,39 @@ func TestLocalEnvironment(t *testing.T) {
 
 	expectedvalue := os.Getenv("TEST")
 	if expectedvalue != "Success" {
-		t.Errorf("Unexpected value received for TEST attribute: '%s'", expectedvalue)
+		t.Errorf("Unexpected value received for TEST. Expected 'Success', received '%s'", expectedvalue)
 	}
 
 	Clear()
 
 	clearedValue := os.Getenv("TEST")
 	if clearedValue != "" {
-		t.Errorf("Unexpected value received for TEST after Clear: '%s'", clearedValue)
+		t.Errorf("Unexpected value received for TEST after Clear: '%s' (expected an empty value)", clearedValue)
+	}
+}
+
+func TestNestedParsing(t *testing.T) {
+	content := `{
+		"a": {
+			"b": {
+				"c": "ok"
+			}
+		},
+		"simple": "test",
+		"int": 1,
+		"dec": 1.5,
+		"boolean": true
+	}`
+
+	data, _ := parse([]byte(content))
+	
+	v, ok := data["a_b_c"]
+	if !ok {
+		t.Error("Expected a variable called a_b_c. This does not exist.")
+	}
+
+	if v != "ok" {
+		t.Errorf("Expected the flattened value to be 'ok', received '%v'", v)
 	}
 }
 
