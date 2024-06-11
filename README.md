@@ -2,7 +2,6 @@
 
 [![Version](https://img.shields.io/github/tag/coreybutler/go-localenvironment.svg)](https://github.com/coreybutler/go-localenvironment)
 [![GoDoc](https://godoc.org/github.com/coreybutler/go-localenvironment?status.svg)](https://godoc.org/github.com/coreybutler/go-localenvironment)
-[![Build Status](https://travis-ci.org/coreybutler/go-localenvironment.svg?branch=master)](https://travis-ci.org/coreybutler/go-localenvironment)
 
 Apply environment variables sourced from `env.json`, `.env`, or custom sources in the current working directory. This is a port of the [coreybutler/localenvironment](https://github.com/coreybutler/localenvironment) Node.js module.
 
